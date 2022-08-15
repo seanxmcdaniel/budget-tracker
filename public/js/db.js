@@ -24,17 +24,17 @@ request.onerror = function (event) {
 function saveRecord(record) {
     const transactions = db.transaction(["new transaction"], "readwrite");
 
-    const transactionsObjectStore = transactions.objectStore("new transaction");
+    const transactionStore = transactions.objectStore("new transaction");
 
-    transactionsObjectStore.add(record);
+    transactionStore.add(record);
 }
 
 function uploadTransactions() {
     const transactions = db.transaction(["new transaction"], "readwrite");
 
-    const transactionsObjectStore = transactions.objectStore("new transaction");
+    const transactionStore = transactions.objectStore("new transaction");
 
-    const getAll = transactionsObjectStore.getAll();
+    const getAll = transactionStore.getAll();
 
     getAll.onsuccess = function () {
         if (getAll.result.length > 0) {
@@ -54,10 +54,10 @@ function uploadTransactions() {
 
                     const transactions = db.transaction(["new transaction"], "readwrite");
 
-                    const transactionsObjectStore =
+                    const transactionStore =
                         transactions.objectStore("new transaction");
 
-                    transactionsObjectStore.clear();
+                    transactionStore.clear();
 
                     alert("New transactions have been submitted");
                 })
