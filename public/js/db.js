@@ -1,11 +1,11 @@
 let db;
 
-const request = indexedDB.open("budget_tracker", 1);
+const request = indexedDB.open("budget tracker", 1);
 
 request.onupgradeneeded = function (event) {
     const db = event.target.result;
 
-    db.createObjectStore("new_transaction", { autoIncrement: true });
+    db.createObjectStore("new transaction", { autoIncrement: true });
 };
 
 
@@ -22,17 +22,17 @@ request.onerror = function (event) {
 };
 
 function saveRecord(record) {
-    const transactions = db.transaction(["new_transaction"], "readwrite");
+    const transactions = db.transaction(["new transaction"], "readwrite");
 
-    const transactionsObjectStore = transactions.objectStore("new_transaction");
+    const transactionsObjectStore = transactions.objectStore("new transaction");
 
     transactionsObjectStore.add(record);
 }
 
 function uploadTransactions() {
-    const transactions = db.transaction(["new_transaction"], "readwrite");
+    const transactions = db.transaction(["new transaction"], "readwrite");
 
-    const transactionsObjectStore = transactions.objectStore("new_transaction");
+    const transactionsObjectStore = transactions.objectStore("new transaction");
 
     const getAll = transactionsObjectStore.getAll();
 
@@ -52,14 +52,14 @@ function uploadTransactions() {
                         throw new Error(serverResponse);
                     }
 
-                    const transactions = db.transaction(["new_transaction"], "readwrite");
+                    const transactions = db.transaction(["new transaction"], "readwrite");
 
                     const transactionsObjectStore =
-                        transactions.objectStore("new_transaction");
+                        transactions.objectStore("new transaction");
 
                     transactionsObjectStore.clear();
 
-                    alert("All saved transactions have been submitted");
+                    alert("New transactions have been submitted");
                 })
                 .catch((err) => {
                     console.log(err);
